@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- META:INICIO — gerado pelo gerador de cardápios. -->
+<title>Rei Lanches · Cardápio</title>
+<meta name="description" content="Faça seu pedido na Rei Lanches pelo WhatsApp.">
+<meta name="theme-color" content="#111111">
+<link rel="icon" href="assets/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Rei Lanches">
+<meta property="og:title" content="Rei Lanches · Cardápio">
+<meta property="og:description" content="Faça seu pedido na Rei Lanches pelo WhatsApp.">
+<meta property="og:image" content="assets/img/banner.webp">
+<meta name="twitter:card" content="summary_large_image">
+<!-- META:FIM -->
+<link rel="stylesheet" href="css/app.css">
+<script src="config/loja.js"></script>
+<script src="js/app.js" defer></script>
+</head>
+<body>
+<div class="app" id="app">
+
+  <!-- ============ TELA: INÍCIO ============ -->
+  <section class="screen home" id="home" aria-label="Cardápio">
+    <header class="top">
+      <div class="top-row">
+        <div class="loc">
+          <div class="logo" id="logo"></div>
+          <div class="loc-txt">
+            <p class="loc-label"><span class="dot" id="status-dot"></span><span id="status-label">Aberto agora</span></p>
+            <p class="loc-name">
+              <svg class="pin" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7.5 7.5 0 0 0-7.5 7.5c0 5.4 6.6 11.7 6.9 12a.9.9 0 0 0 1.2 0c.3-.3 6.9-6.6 6.9-12A7.5 7.5 0 0 0 12 2zm0 10.2a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4z"/></svg>
+              <span id="store-name"></span>
+            </p>
+          </div>
+        </div>
+        <div class="top-actions">
+          <a class="icon-btn" href="#/carrinho" aria-label="Carrinho">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.5L21 8H6.2"/><path d="M10 11h6"/><circle cx="10" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/></svg>
+            <span class="count" id="cart-count" hidden></span>
+          </a>
+        </div>
+      </div>
+      <div class="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <label class="sr" for="q">Buscar</label>
+        <input id="q" type="search" placeholder="Busque sua comida favorita" autocomplete="off">
+        <button class="filter-btn" id="btn-filter" type="button" aria-label="Ir para categorias">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 8h10M18 8h2M4 16h2M10 16h10"/><circle cx="16" cy="8" r="2"/><circle cx="8" cy="16" r="2"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="sheet">
+      <button class="status-card" id="status-card" type="button" aria-label="Ver horários de atendimento">
+        <span class="status-ic" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </span>
+        <span class="status-txt">
+          <span class="status-title"><span class="pulse" aria-hidden="true"></span><span id="status-title">Aberto agora</span></span>
+          <span class="status-sub" id="status-sub"></span>
+        </span>
+        <span class="status-more">Horários
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </span>
+      </button>
+
+      <div class="repeat" id="repeat" hidden>
+        <span class="repeat-ic" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg>
+        </span>
+        <span class="repeat-txt">
+          <span class="repeat-title">Pedir de novo?</span>
+          <span class="repeat-items" id="repeat-items"></span>
+          <span class="repeat-meta" id="repeat-meta"></span>
+        </span>
+        <button class="btn-pri sm" type="button" id="btn-repeat">Repetir</button>
+      </div>
+
+      <button class="promo" id="promo" type="button">
+        <span class="promo-txt">
+          <span class="promo-tag" id="promo-tag"></span>
+          <span class="promo-title" id="promo-title"></span>
+          <span class="btn-dark" id="promo-btn"></span>
+        </span>
+        <img class="promo-img" id="promo-img" alt="">
+      </button>
+
+      <div class="sec-h" id="cats-h">
+        <h2 class="h2">Categorias</h2>
+        <button class="lnk" type="button" id="see-all-cats">Ver todas</button>
+      </div>
+      <div class="cats" id="cats"></div>
+
+      <div class="sec-h">
+        <h2 class="h2" id="list-title">Mais pedidos</h2>
+        <button class="lnk" type="button" id="see-all">Ver tudo</button>
+      </div>
+      <div class="list" id="list"></div>
+    </main>
+
+    <a class="cartbar" href="#/carrinho" id="cartbar" hidden>
+      <span class="cartbar-ic">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.5L21 8H6.2"/><circle cx="10" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/></svg>
+        <span class="count" id="cartbar-count"></span>
+      </span>
+      <span class="cartbar-info">Seu pedido<b id="cartbar-total"></b></span>
+      <span class="btn-pri sm">Ver carrinho</span>
+    </a>
+  </section>
+
+  <!-- ============ TELA: DETALHES ============ -->
+  <section class="screen detail" id="detail" hidden aria-label="Detalhes do produto">
+    <header class="dtop">
+      <div class="nav">
+        <button class="icon-btn" type="button" data-back aria-label="Voltar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <h1 class="nav-title">Detalhes</h1>
+        <button class="icon-btn" type="button" id="btn-share" aria-label="Compartilhar produto">
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.7" fill="currentColor"/><circle cx="12" cy="12" r="1.7" fill="currentColor"/><circle cx="19" cy="12" r="1.7" fill="currentColor"/></svg>
+        </button>
+      </div>
+      <div class="order-meta">
+        <div class="order-name">
+          <p class="lbl-d">Seu pedido</p>
+          <p class="d-name" id="d-name"></p>
+        </div>
+        <div>
+          <p class="lbl-d">Qtd</p>
+          <div class="qty">
+            <button type="button" id="qty-minus" aria-label="Diminuir quantidade"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+            <b id="qty-val">1</b>
+            <button type="button" id="qty-plus" aria-label="Aumentar quantidade"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="dsheet">
+      <div class="carousel" id="carousel"></div>
+      <div class="dots" id="dots"></div>
+      <h3 class="h3">Sobre o produto</h3>
+      <p class="about" id="d-desc"></p>
+      <p class="about combo-inc" id="d-combo" hidden></p>
+      <div class="size-row" id="size-row">
+        <span class="h3 size-lbl">Tamanho</span>
+        <div class="pills" id="sizes"></div>
+      </div>
+      <label class="h3" for="obs">Alguma observação?</label>
+      <textarea class="field" id="obs" rows="2" placeholder="Ex.: sem cebola, ponto da carne…"></textarea>
+    </main>
+    <footer class="bottom">
+      <div class="price-box"><p class="lbl">Preço</p><p class="price-big" id="d-price"></p></div>
+      <button class="btn-pri" type="button" id="btn-add">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.5L21 8H6.2"/><circle cx="10" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/></svg>
+        Adicionar ao carrinho
+      </button>
+    </footer>
+  </section>
+
+  <!-- ============ FOLHA: PERSONALIZAR ============ -->
+  <div class="backdrop" id="custom" hidden>
+    <div class="bsheet custom" role="dialog" aria-modal="true" aria-labelledby="c-title">
+      <div class="grab" aria-hidden="true"></div>
+      <h2 class="bsheet-title" id="c-title">Personalize seu pedido</h2>
+      <div class="custom-body">
+        <img class="custom-plate" id="c-img" alt="">
+        <p class="lbl">Escolha os adicionais de</p>
+        <p class="c-name" id="c-name"></p>
+        <div id="c-groups"></div>
+      </div>
+      <footer class="bottom in-sheet">
+        <div class="price-box"><p class="lbl">Preço</p><p class="price-big" id="c-price"></p></div>
+        <button class="btn-pri" type="button" id="btn-continue">Continuar</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ============ TELA: CARRINHO ============ -->
+  <section class="screen cart" id="cart" hidden aria-label="Carrinho">
+    <header class="dtop short">
+      <div class="nav">
+        <button class="icon-btn" type="button" data-back aria-label="Voltar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <h1 class="nav-title">Seu pedido</h1>
+        <button class="icon-btn" type="button" id="btn-clear" aria-label="Limpar carrinho">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>
+        </button>
+      </div>
+    </header>
+    <main class="dsheet">
+      <div class="empty" id="cart-empty" hidden>
+        <p class="empty-t">Seu carrinho está vazio</p>
+        <p>Escolha algo gostoso no cardápio.</p>
+        <a class="btn-pri" href="#/">Ver cardápio</a>
+      </div>
+      <div id="cart-full">
+        <div id="cart-items"></div>
+        <a class="addmore" href="#/">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          Adicionar mais itens
+        </a>
+
+        <h3 class="h3">Seus dados</h3>
+        <label class="sr" for="f-name">Seu nome</label>
+        <input class="field" id="f-name" data-c="name" placeholder="Seu nome" autocomplete="name">
+
+        <div id="mode-wrap">
+          <h3 class="h3">Como prefere receber?</h3>
+          <div class="seg">
+            <button type="button" data-mode="entrega">Entrega</button>
+            <button type="button" data-mode="retirada">Retirar no local</button>
+          </div>
+        </div>
+
+        <div id="addr-wrap">
+          <h3 class="h3">Endereço de entrega</h3>
+          <div class="form">
+            <div class="row2">
+              <input class="field" data-c="street" placeholder="Rua / Avenida" aria-label="Rua" autocomplete="address-line1">
+              <input class="field" data-c="number" placeholder="Nº" aria-label="Número" inputmode="numeric">
+            </div>
+            <input class="field" data-c="district" placeholder="Bairro" aria-label="Bairro">
+            <input class="field" data-c="ref" placeholder="Complemento / referência (opcional)" aria-label="Complemento">
+          </div>
+        </div>
+
+        <div id="pickup-wrap" hidden>
+          <h3 class="h3">Retirada</h3>
+          <p class="note" id="pickup-addr"></p>
+        </div>
+
+        <div id="pay-wrap">
+          <h3 class="h3">Pagamento</h3>
+          <div class="pills" id="pays"></div>
+          <input class="field mt" id="f-change" data-c="change" placeholder="Troco para quanto? (vazio = não precisa)" aria-label="Troco para quanto" inputmode="numeric" autocomplete="off" hidden>
+          <p class="coupon-msg" id="change-msg" role="status" hidden></p>
+        </div>
+
+        <label class="h3" for="f-obs">Observações do pedido</label>
+        <textarea class="field" id="f-obs" data-c="obs" rows="2" placeholder="Opcional"></textarea>
+
+        <div id="coupon-wrap">
+          <label class="h3" for="f-coupon">Cupom de desconto</label>
+          <div class="coupon-form" id="coupon-form">
+            <input class="field" id="f-coupon" placeholder="Digite seu cupom" autocomplete="off" autocapitalize="characters" spellcheck="false">
+            <button class="coupon-btn" type="button" id="btn-coupon">Aplicar</button>
+          </div>
+          <div class="coupon-on" id="coupon-on" hidden>
+            <span class="coupon-tag" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>
+            </span>
+            <span class="coupon-info"><b id="coupon-code"></b><span id="coupon-desc"></span></span>
+            <button class="coupon-rm" type="button" id="btn-coupon-rm">Remover</button>
+          </div>
+          <p class="coupon-msg" id="coupon-msg" role="status" hidden></p>
+        </div>
+
+        <div class="sum">
+          <div><span>Subtotal</span><span id="s-sub"></span></div>
+          <div class="sum-disc" id="s-coupon-row" hidden><span id="s-coupon-lbl">Cupom</span><span id="s-coupon"></span></div>
+          <div id="s-fee-row"><span>Taxa de entrega</span><span id="s-fee"></span></div>
+          <div class="sum-t"><span>Total</span><span id="s-total"></span></div>
+        </div>
+        <div class="alert mt" id="min-alert" hidden></div>
+        <div class="alert warn mt" id="closed-alert-2" hidden></div>
+      </div>
+    </main>
+    <footer class="bottom" id="cart-bottom">
+      <div class="price-box"><p class="lbl">Total</p><p class="price-big" id="c-total"></p></div>
+      <button class="btn-pri wa" type="button" id="btn-send">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.6-5.2A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 10.5h7M8.5 13.5h4.5"/></svg>
+        <span id="btn-send-txt">Enviar no WhatsApp</span>
+      </button>
+    </footer>
+  </section>
+
+  <!-- ============ TELA: ENVIADO ============ -->
+  <section class="screen done" id="done" hidden aria-label="Pedido enviado">
+    <header class="dtop short"><div class="nav"><span class="ph"></span><h1 class="nav-title">Pedido</h1><span class="ph"></span></div></header>
+    <main class="dsheet done-body">
+      <div class="done-ok"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg></div>
+      <h2 class="h2">Quase lá!</h2>
+      <p class="about" id="done-text">Seu pedido foi montado no WhatsApp. É só tocar em enviar na conversa.</p>
+      <a class="btn-pri wa" id="done-wa" href="#" target="_blank" rel="noopener">Abrir WhatsApp de novo</a>
+      <a class="btn-ghost" href="#/">Voltar ao cardápio</a>
+    </main>
+  </section>
+
+  <!-- ============ FOLHA: INFORMAÇÕES ============ -->
+  <div class="backdrop" id="info" hidden>
+    <div class="bsheet" role="dialog" aria-modal="true" aria-labelledby="i-title">
+      <div class="grab" aria-hidden="true"></div>
+      <h2 class="bsheet-title" id="i-title">Sobre a loja</h2>
+      <div class="status-card big" id="info-status"></div>
+      <h3 class="h3">Horário de atendimento</h3>
+      <ul class="week" id="week"></ul>
+      <h3 class="h3">Informações</h3>
+      <dl class="info-list" id="info-list"></dl>
+      <button class="btn-ghost" type="button" data-close>Fechar</button>
+    </div>
+  </div>
+</div>
+
+<div id="admin"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="filepick" hidden>
+</body>
+</html>
